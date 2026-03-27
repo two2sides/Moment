@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@drawable/bg_card_cute">
+
+        <EditText
+            android:id="@+id/etEditTaskNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/MomentInput"
+            android:hint="@string/task_note_hint"
+            android:inputType="textMultiLine"
+            android:minLines="2"
+            android:gravity="top|start"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/etEditTaskRewardMinutes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/MomentInput"
+            android:hint="@string/reward_minutes_hint"
+            android:inputType="number"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/etEditTaskTargetMinutes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/MomentInput"
+            android:hint="@string/target_minutes_hint"
+            android:inputType="number"
+            android:visibility="gone" />
+
+    </LinearLayout>
+</ScrollView>
+

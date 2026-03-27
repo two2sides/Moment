@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@drawable/bg_card_cute">
+
+        <EditText
+            android:id="@+id/etTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/MomentInput"
+            android:hint="@string/task_title_hint"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/etNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/MomentInput"
+            android:hint="@string/task_note_hint"
+            android:layout_marginBottom="8dp"
+            android:minLines="2"
+            android:gravity="top|start"
+            android:inputType="textMultiLine" />
+
+        <RadioGroup
+            android:id="@+id/rgTaskType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <RadioButton
+                android:id="@+id/rbManualTask"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:textColor="@color/text_primary"
+                android:text="@string/task_type_manual_submit" />
+
+            <RadioButton
+                android:id="@+id/rbAppTask"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textColor="@color/text_primary"
+                android:text="@string/task_type_app_usage" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/etTargetMinutes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/MomentInput"
+            android:hint="@string/target_minutes_hint"
+            android:inputType="number"
+            android:visibility="gone"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/etRewardMinutes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/MomentInput"
+            android:hint="@string/reward_minutes_hint"
+            android:inputType="number"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/etTargetPackage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/MomentInput"
+            android:hint="@string/target_package_hint"
+            android:visibility="gone"
+            android:layout_marginBottom="8dp" />
+
+        <Switch
+            android:id="@+id/switchRepeatable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_primary"
+            android:text="@string/repeatable_settlement"
+            android:layout_marginBottom="8dp" />
+
+
+    </LinearLayout>
+</ScrollView>
+

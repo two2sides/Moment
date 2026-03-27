@@ -1,0 +1,118 @@
+<resources>
+    <string name="app_name">Moment</string>
+    <string name="accessibility_desc">Moment需要此权限来监控当前运行的App，以此判定你是在干活还是在摸鱼。</string>
+
+    <string name="nav_home">首页</string>
+    <string name="nav_tasks">任务</string>
+    <string name="nav_completed">已完成</string>
+    <string name="nav_statistics">统计</string>
+    <string name="nav_settings">设置</string>
+
+    <string name="tasks_title">可进行任务</string>
+    <string name="completed_title">已完成任务</string>
+    <string name="statistics_title">统计概览</string>
+    <string name="settings_title">设置</string>
+
+    <string name="create_task">创建任务</string>
+    <string name="save">保存</string>
+    <string name="cancel">取消</string>
+    <string name="submit">提交</string>
+
+    <string name="task_title_hint">任务标题</string>
+    <string name="task_note_hint">任务备注（可选）</string>
+    <string name="task_type_manual_submit">提交任务</string>
+    <string name="task_type_app_usage">时长任务</string>
+    <string name="target_minutes_hint">目标时长（分钟，仅时长任务）</string>
+    <string name="reward_minutes_hint">奖励时长（分钟）</string>
+    <string name="target_package_hint">目标包名（仅时长任务）</string>
+    <string name="repeatable_settlement">可重复完成（循环任务）</string>
+
+    <string name="complete_and_submit">完成并提交</string>
+    <string name="submit_task_dialog_title">提交任务材料</string>
+    <string name="submit_task_target">任务：%1$s</string>
+    <string name="submit_text_hint">提交文本</string>
+    <string name="submit_markdown_hint">提交内容（支持Markdown，可插入图片）</string>
+    <string name="pick_image">选择图片</string>
+    <string name="insert_markdown_image">插入图片到Markdown</string>
+    <string name="markdown_tip">示例：先写文字，再插入图片，再继续写文字，形成图文混排。</string>
+    <string name="markdown_image_inserted">图片已插入Markdown内容</string>
+    <string name="submit_image_picked">已选择图片：%1$s</string>
+
+    <string name="search_submitted_text">搜索提交文本</string>
+    <string name="search_task_name">搜索任务名字</string>
+    <string name="search_start_date">开始日期（点击选择）</string>
+    <string name="search_end_date">结束日期（点击选择）</string>
+    <string name="clear_date_range">清空起止时间</string>
+    <string name="filter_by_repeatability">按循环类型筛选</string>
+    <string name="filter_repeat_all">循环：全部</string>
+    <string name="filter_repeat_repeatable">循环：仅循环任务</string>
+    <string name="filter_repeat_one_time">循环：仅一次性任务</string>
+    <string name="no_active_tasks">暂无可进行任务</string>
+    <string name="no_completed_tasks">暂无已完成任务</string>
+
+    <string name="task_type_format">任务类型：%1$s</string>
+    <string name="reward_minutes_format">奖励：%1$d 分钟</string>
+    <string name="reward_minutes_label_format">奖励时长：%1$d 分钟</string>
+    <string name="task_note_preview_format">备注：%1$s</string>
+    <string name="task_note_full_format">备注：%1$s</string>
+    <string name="task_created_at_format">发布时间：%1$s</string>
+    <string name="created_time_format">发布时间：%1$s</string>
+    <string name="task_detail_usage_format">进度：%1$s / %2$s | 包名：%3$s</string>
+    <string name="task_submit_optional_materials">提交说明：可选填写文字和/或图片</string>
+    <string name="completed_time_format">完成时间：%1$s</string>
+    <string name="submitted_text_format">提交文本：%1$s</string>
+    <string name="submitted_text_preview_format">提交文本：%1$s</string>
+    <string name="submitted_text_full_format">提交文本：%1$s</string>
+    <string name="submitted_image_thumbnail">提交图片缩略图</string>
+    <string name="image_preview_content_desc">提交图片预览</string>
+    <string name="task_detail_dialog_title">任务详情</string>
+    <string name="completed_task_detail_dialog_title">完成记录详情</string>
+    <string name="close">关闭</string>
+
+    <string name="task_created">任务已创建</string>
+    <string name="task_submit_success">任务提交成功</string>
+    <string name="task_deleted">任务已删除</string>
+    <string name="task_updated">任务已更新</string>
+    <string name="completed_record_deleted">完成记录已删除</string>
+    <string name="task_not_found_or_invalid">任务不存在或类型不正确</string>
+    <string name="enter_task_title">请输入任务标题</string>
+    <string name="reward_minutes_positive">奖励分钟必须大于0</string>
+    <string name="target_minutes_positive">时长任务目标分钟必须大于0</string>
+    <string name="target_package_required">时长任务需要填写包名</string>
+    <string name="submit_optional_material_hint">你可以直接提交，也可以补充文字或图片</string>
+    <string name="edit_task">编辑</string>
+    <string name="delete">删除</string>
+
+    <string name="daily_base_minutes_label">每日基础时间（分钟）</string>
+    <string name="daily_base_minutes_cooldown_hint">提示：基础时间每24小时仅可修改一次；冷却中仍可保存拦截列表。</string>
+    <string name="blocked_apps_label">拦截 App 包名（每行一个）</string>
+    <string name="save_settings">保存设置</string>
+    <string name="open_accessibility_settings">打开无障碍设置</string>
+    <string name="daily_base_minutes_invalid">基础时间请输入非负整数</string>
+    <string name="daily_base_minutes_cooldown">拦截列表已保存，基础时间仍在冷却中（剩余：%1$s）</string>
+    <string name="cooldown_hours_minutes_format">%1$d小时%2$d分钟</string>
+    <string name="cooldown_minutes_format">%1$d分钟</string>
+    <string name="settings_saved">设置已保存</string>
+
+    <string name="home_balance_placeholder">剩余时间：--:--</string>
+    <string name="home_balance_format">剩余时间：%1$02d:%2$02d</string>
+    <string name="home_managed_apps_title">目前管理包名</string>
+    <string name="home_managed_apps_none">无</string>
+    <string name="home_current_app_placeholder">当前前台包名：未知</string>
+    <string name="home_current_app_format">当前前台包名：%1$s</string>
+    <string name="home_unknown_app">未知</string>
+
+    <string name="stats_current_balance">当前剩余时间：%1$d 分钟</string>
+    <string name="stats_today_earned">今日获得：%1$d 分钟</string>
+    <string name="stats_today_spent">今日消耗：%1$d 分钟</string>
+    <string name="stats_today_net">今日净变化：%1$d 分钟</string>
+    <string name="stats_today_completed">今日完成任务：%1$d</string>
+    <string name="stats_week_completed">近7天完成任务：%1$d</string>
+    <string name="stats_current_streak">当前连续完成天数：%1$d</string>
+    <string name="stats_type_header">任务类型占比（近7天）</string>
+    <string name="stats_type_item">%1$s：%2$d 次，奖励 %3$d 分钟（%4$.1f%%）</string>
+    <string name="stats_type_empty">近7天暂无完成任务</string>
+    <string name="stats_top_header">Top 任务（近7天，按奖励分钟）</string>
+    <string name="stats_top_item">%1$d. %2$s（%3$d 次，%4$d 分钟）</string>
+    <string name="stats_top_empty">近7天暂无任务贡献</string>
+</resources>

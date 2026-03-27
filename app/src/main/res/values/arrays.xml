@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="completed_repeat_filter_options">
+        <item>@string/filter_repeat_all</item>
+        <item>@string/filter_repeat_repeatable</item>
+        <item>@string/filter_repeat_one_time</item>
+    </string-array>
+</resources>
+

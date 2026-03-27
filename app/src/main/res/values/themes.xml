@@ -1,0 +1,16 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.Moment" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/pink_400</item>
+        <item name="colorOnPrimary">@color/text_on_accent</item>
+        <item name="colorPrimaryContainer">@color/lavender_300</item>
+        <item name="colorOnPrimaryContainer">@color/text_primary</item>
+        <item name="colorSecondary">@color/mint_300</item>
+        <item name="colorOnSecondary">@color/text_primary</item>
+        <item name="colorTertiary">@color/sky_200</item>
+        <item name="android:colorBackground">@color/bg_soft_start</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+    </style>
+
+    <style name="Theme.Moment" parent="Base.Theme.Moment" />
+</resources>

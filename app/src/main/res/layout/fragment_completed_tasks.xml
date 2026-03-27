@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:clipToPadding="false">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/completed_title"
+        style="@style/MomentTitle"
+        android:layout_marginBottom="10dp" />
+
+    <EditText
+        android:id="@+id/etCompletedNameKeyword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/MomentInput"
+        android:hint="@string/search_task_name"
+        android:inputType="text"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/etCompletedContentKeyword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/MomentInput"
+        android:hint="@string/search_submitted_text"
+        android:inputType="text"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/etCompletedStartDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/MomentInput"
+        android:hint="@string/search_start_date"
+        android:focusable="false"
+        android:clickable="true"
+        android:inputType="none"
+        android:layout_marginBottom="8dp"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/etCompletedEndDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/MomentInput"
+        android:hint="@string/search_end_date"
+        android:focusable="false"
+        android:clickable="true"
+        android:inputType="none"
+        android:layout_marginBottom="8dp"
+        android:importantForAutofill="no" />
+
+    <Button
+        android:id="@+id/btnClearDateRange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/MomentSecondaryButton"
+        android:text="@string/clear_date_range"
+        android:layout_marginBottom="8dp" />
+
+    <Spinner
+        android:id="@+id/spCompletedRepeatFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_input_cute"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:layout_marginBottom="8dp"
+        android:prompt="@string/filter_by_repeatability" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCompleted"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/tvCompletedEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/no_completed_tasks"
+        android:textColor="@color/text_secondary"
+        android:gravity="center"
+        android:visibility="gone"
+        android:paddingTop="12dp" />
+
+</LinearLayout>
+

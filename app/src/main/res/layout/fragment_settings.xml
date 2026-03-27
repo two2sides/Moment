@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:clipToPadding="false">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_title"
+            style="@style/MomentTitle"
+            android:layout_marginBottom="16dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card_cute"
+            android:padding="14dp"
+            android:layout_marginBottom="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/daily_base_minutes_label"
+            android:textColor="@color/text_primary" />
+
+        <EditText
+            android:id="@+id/etDailyBaseMinutes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/MomentInput"
+            android:inputType="number"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/daily_base_minutes_cooldown_hint"
+            android:textSize="12sp"
+            android:textColor="@color/text_secondary"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/blocked_apps_label"
+            android:textColor="@color/text_primary" />
+
+        <EditText
+            android:id="@+id/etBlockedApps"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            style="@style/MomentInput"
+            android:gravity="top|start"
+            android:inputType="textMultiLine"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btnSaveSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/MomentPrimaryButton"
+            android:text="@string/save_settings"
+            android:layout_marginBottom="10dp" />
+
+        <Button
+            android:id="@+id/btnAccessibility"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/MomentSecondaryButton"
+            android:text="@string/open_accessibility_settings"
+            android:layout_marginBottom="4dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
+
