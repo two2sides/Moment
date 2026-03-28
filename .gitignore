@@ -19,4 +19,5 @@ local.properties
 *.jks
 *.keystore
 keystore.properties
+gradle.properties
 
