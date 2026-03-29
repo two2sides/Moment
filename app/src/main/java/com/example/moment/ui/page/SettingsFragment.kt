@@ -1,11 +1,14 @@
 package com.example.moment.ui.page
 
+import android.app.AppOpsManager
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.moment.R
@@ -16,14 +19,17 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
     private lateinit var etDailyBaseMinutes: EditText
     private lateinit var etBlockedApps: EditText
+    private lateinit var tvUsageAccessStatus: TextView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         etDailyBaseMinutes = view.findViewById(R.id.etDailyBaseMinutes)
         etBlockedApps = view.findViewById(R.id.etBlockedApps)
+        tvUsageAccessStatus = view.findViewById(R.id.tvUsageAccessStatus)
         val btnSave = view.findViewById<Button>(R.id.btnSaveSettings)
         val btnAccessibility = view.findViewById<Button>(R.id.btnAccessibility)
+        val btnUsageAccess = view.findViewById<Button>(R.id.btnUsageAccess)
 
         loadCurrentSettings()
 
@@ -34,6 +40,15 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         btnAccessibility.setOnClickListener {
             startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
         }
+
+        btnUsageAccess.setOnClickListener {
+            startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        refreshUsageAccessStatus()
     }
 
     private fun loadCurrentSettings() {
@@ -82,6 +97,34 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         } else {
             getString(R.string.cooldown_minutes_format, minutes)
         }
+    }
+
+    private fun refreshUsageAccessStatus() {
+        tvUsageAccessStatus.text = if (isUsageAccessGranted()) {
+            getString(R.string.usage_access_status_granted)
+        } else {
+            getString(R.string.usage_access_status_denied)
+        }
+    }
+
+    private fun isUsageAccessGranted(): Boolean {
+        val context = requireContext()
+        val appOpsManager = context.getSystemService(AppOpsManager::class.java) ?: return false
+        val mode = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            appOpsManager.unsafeCheckOpNoThrow(
+                AppOpsManager.OPSTR_GET_USAGE_STATS,
+                android.os.Process.myUid(),
+                context.packageName
+            )
+        } else {
+            @Suppress("DEPRECATION")
+            appOpsManager.checkOpNoThrow(
+                AppOpsManager.OPSTR_GET_USAGE_STATS,
+                android.os.Process.myUid(),
+                context.packageName
+            )
+        }
+        return mode == AppOpsManager.MODE_ALLOWED
     }
 
 }

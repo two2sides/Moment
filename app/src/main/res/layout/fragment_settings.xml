@@ -76,6 +76,23 @@
             android:layout_height="wrap_content"
             style="@style/MomentSecondaryButton"
             android:text="@string/open_accessibility_settings"
+            android:layout_marginBottom="10dp" />
+
+        <TextView
+            android:id="@+id/tvUsageAccessStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/usage_access_status_unknown"
+            android:textSize="12sp"
+            android:textColor="@color/text_secondary"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btnUsageAccess"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/MomentSecondaryButton"
+            android:text="@string/open_usage_access_settings"
             android:layout_marginBottom="4dp" />
         </LinearLayout>
 

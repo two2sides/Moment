@@ -88,6 +88,10 @@
     <string name="blocked_apps_label">拦截 App 包名（每行一个）</string>
     <string name="save_settings">保存设置</string>
     <string name="open_accessibility_settings">打开无障碍设置</string>
+    <string name="open_usage_access_settings">打开使用情况访问设置</string>
+    <string name="usage_access_status_unknown">使用情况访问权限状态：未知</string>
+    <string name="usage_access_status_granted">使用情况访问权限状态：已授权</string>
+    <string name="usage_access_status_denied">使用情况访问权限状态：未授权（奖励计时将降级）</string>
     <string name="daily_base_minutes_invalid">基础时间请输入非负整数</string>
     <string name="daily_base_minutes_cooldown">拦截列表已保存，基础时间仍在冷却中（剩余：%1$s）</string>
     <string name="cooldown_hours_minutes_format">%1$d小时%2$d分钟</string>
@@ -101,6 +105,9 @@
     <string name="home_current_app_placeholder">当前前台包名：未知</string>
     <string name="home_current_app_format">当前前台包名：%1$s</string>
     <string name="home_unknown_app">未知</string>
+    <string name="home_debug_placeholder">调试信息加载中...</string>
+    <string name="home_debug_format">调试（每%1$d秒刷新）\n前台：%2$s\n命中奖励任务：%3$d\n本周期进度增加：%4$d 秒（窗口约 %5$d 秒）\n命中任务总进度：%6$d 秒\n原因：%7$s</string>
+    <string name="home_clear_debug_log">清空调试日志</string>
 
     <string name="stats_current_balance">当前剩余时间：%1$d 分钟</string>
     <string name="stats_today_earned">今日获得：%1$d 分钟</string>

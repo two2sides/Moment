@@ -15,18 +15,20 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var tvBalance: TextView
     private lateinit var cgManagedApps: ChipGroup
     private lateinit var tvManagedAppsEmpty: TextView
-    private lateinit var tvCurrentApp: TextView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         tvBalance = view.findViewById(R.id.tvBalance)
         cgManagedApps = view.findViewById(R.id.cgManagedApps)
         tvManagedAppsEmpty = view.findViewById(R.id.tvManagedAppsEmpty)
-        tvCurrentApp = view.findViewById(R.id.tvCurrentApp)
     }
 
     override fun onResume() {
         super.onResume()
+        refreshMainInfo()
+    }
+
+    private fun refreshMainInfo() {
         val context = requireContext()
         TimeManager.checkAndPerformDailyReset(context)
 
@@ -47,11 +49,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
         }
 
-        val currentApp = TimeManager.getCurrentForegroundApp(context)
-        tvCurrentApp.text = getString(
-            R.string.home_current_app_format,
-            if (currentApp.isBlank()) getString(R.string.home_unknown_app) else currentApp
-        )
     }
 
     private fun createPackageChip(packageName: String): Chip {
