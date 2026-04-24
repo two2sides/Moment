@@ -2,12 +2,14 @@ package com.example.moment.service
 
 import android.accessibilityservice.AccessibilityService
 import android.app.AppOpsManager
+import android.app.KeyguardManager
 import android.app.usage.UsageEvents
 import android.app.usage.UsageStatsManager
 import android.content.Intent
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
+import android.os.PowerManager
 import android.os.SystemClock
 import android.view.accessibility.AccessibilityEvent
 import com.example.moment.data.AppDatabase
@@ -119,7 +121,16 @@ class AppMonitorService : AccessibilityService() {
         if (!shouldRun) return
         lastUsageAccountingElapsedMs = nowElapsed
 
+        if (!isDeviceInteractiveAndUnlocked()) {
+            // Reset the accounting anchor to avoid charging time across non-interactive periods.
+            lastUsageProcessWallTimeMs = System.currentTimeMillis()
+            lastKnownUsageForegroundApp = ""
+            TimeManager.setCurrentForegroundApp(this, "")
+            return
+        }
+
         if (!hasUsageAccess()) {
+            lastUsageProcessWallTimeMs = System.currentTimeMillis()
             return
         }
 
@@ -134,39 +145,35 @@ class AppMonitorService : AccessibilityService() {
 
         val usageSlice = queryUsageSlice(startWallMs, endWallMs)
         lastUsageProcessWallTimeMs = endWallMs
-        if (usageSlice.currentForegroundApp.isNotBlank()) {
-            lastKnownUsageForegroundApp = usageSlice.currentForegroundApp
-            TimeManager.setCurrentForegroundApp(this, usageSlice.currentForegroundApp)
+        if (usageSlice.accountedForegroundApp.isNotBlank()) {
+            lastKnownUsageForegroundApp = usageSlice.accountedForegroundApp
+            TimeManager.setCurrentForegroundApp(this, usageSlice.accountedForegroundApp)
+        } else {
+            lastKnownUsageForegroundApp = ""
+            TimeManager.setCurrentForegroundApp(this, "")
         }
 
         serviceScope.launch {
             taskProcessMutex.withLock {
-                applyUsageAccounting(context, usageSlice.packageDurationMs)
+                applyUsageAccounting(context, usageSlice)
             }
         }
     }
 
     private suspend fun applyUsageAccounting(
         context: AppMonitorService,
-        durationByPackageMs: Map<String, Long>
+        usageSlice: UsageSlice
     ): UsageAccountingResult {
-        if (durationByPackageMs.isEmpty()) {
-            return UsageAccountingResult(0, 0, 0, 0, "NO_USAGE_EVENTS")
-        }
-
-        val durationByPackageSeconds = durationByPackageMs.mapValues { (_, ms) -> (ms / 1000L).toInt() }
-            .filterValues { it > 0 }
-        if (durationByPackageSeconds.isEmpty()) {
+        val fg = normalizePackageName(usageSlice.accountedForegroundApp)
+        val seconds = usageSlice.accountedDurationSeconds
+        if (fg.isBlank() || seconds <= 0) {
             return UsageAccountingResult(0, 0, 0, 0, "SLICE_LT_1S")
         }
 
         val blockedAppsNormalized = TimeManager.getBlockedApps(context)
             .map { normalizePackageName(it) }
             .toSet()
-        val consumedSeconds = durationByPackageSeconds.entries
-            .filter { blockedAppsNormalized.contains(normalizePackageName(it.key)) }
-            .sumOf { it.value }
-            .coerceAtLeast(0)
+        val consumedSeconds = if (blockedAppsNormalized.contains(fg)) seconds else 0
         if (consumedSeconds > 0) {
             TimeManager.consumeSeconds(context, consumedSeconds)
         }
@@ -180,10 +187,7 @@ class AppMonitorService : AccessibilityService() {
         tasks.forEach { task ->
             val target = normalizePackageName(task.targetPackage)
             if (target.isBlank()) return@forEach
-            val addSeconds = durationByPackageSeconds.entries
-                .firstOrNull { normalizePackageName(it.key) == target }
-                ?.value
-                ?: 0
+            val addSeconds = if (target == fg) seconds else 0
             if (addSeconds <= 0) return@forEach
 
             matchedTaskCount += 1
@@ -213,12 +217,14 @@ class AppMonitorService : AccessibilityService() {
 
     private data class UsageSlice(
         val packageDurationMs: Map<String, Long>,
-        val currentForegroundApp: String
+        val currentForegroundApp: String,
+        val accountedForegroundApp: String,
+        val accountedDurationSeconds: Int
     )
 
     private fun queryUsageSlice(startMs: Long, endMs: Long): UsageSlice {
         val usageStatsManager = getSystemService(UsageStatsManager::class.java)
-            ?: return UsageSlice(emptyMap(), lastKnownUsageForegroundApp)
+            ?: return UsageSlice(emptyMap(), lastKnownUsageForegroundApp, "", 0)
 
         val events = usageStatsManager.queryEvents(startMs, endMs)
         val event = UsageEvents.Event()
@@ -249,7 +255,31 @@ class AppMonitorService : AccessibilityService() {
             durationMap[activePkg] = (durationMap[activePkg] ?: 0L) + (endMs - cursor)
         }
 
-        return UsageSlice(durationMap, activePkg)
+        val normalizedMap = durationMap
+            .filterKeys { !isTransientSystemOverlayPackage(it) }
+            .mapKeys { normalizePackageName(it.key) }
+            .filterKeys { it.isNotBlank() }
+
+        val accountedPackage = when {
+            activePkg.isNotBlank() && !isTransientSystemOverlayPackage(activePkg) -> normalizePackageName(activePkg)
+            else -> normalizedMap.maxByOrNull { it.value }?.key.orEmpty()
+        }
+        val accountedSeconds = (normalizedMap[accountedPackage] ?: 0L).div(1000L).toInt()
+
+        return UsageSlice(
+            packageDurationMs = normalizedMap,
+            currentForegroundApp = normalizePackageName(activePkg),
+            accountedForegroundApp = accountedPackage,
+            accountedDurationSeconds = accountedSeconds
+        )
+    }
+
+    private fun isDeviceInteractiveAndUnlocked(): Boolean {
+        val powerManager = getSystemService(PowerManager::class.java) ?: return false
+        val isInteractive = powerManager.isInteractive
+        val keyguardManager = getSystemService(KeyguardManager::class.java)
+        val isUnlocked = keyguardManager?.isDeviceLocked?.not() ?: true
+        return isInteractive && isUnlocked
     }
 
     private suspend fun settleTaskIfReachedTarget(
