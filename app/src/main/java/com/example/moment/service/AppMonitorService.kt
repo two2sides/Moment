@@ -318,7 +318,7 @@ class AppMonitorService : AccessibilityService() {
             rewardGrantedMinutes = task.rewardMinutes,
             taskCreatedAtSnapshot = task.createdAt,
             completedAt = System.currentTimeMillis(),
-            logicalDayKey = TimeManager.getCurrentLogicDayKey()
+            logicalDayKey = TimeManager.getCurrentLogicDayKey(this)
         )
     }
 

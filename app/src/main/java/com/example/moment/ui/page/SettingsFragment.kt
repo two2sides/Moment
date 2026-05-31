@@ -18,6 +18,7 @@ import kotlin.math.ceil
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
     private lateinit var etDailyBaseMinutes: EditText
+    private lateinit var etDailyResetHour: EditText
     private lateinit var etBlockedApps: EditText
     private lateinit var tvUsageAccessStatus: TextView
 
@@ -25,6 +26,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         super.onViewCreated(view, savedInstanceState)
 
         etDailyBaseMinutes = view.findViewById(R.id.etDailyBaseMinutes)
+        etDailyResetHour = view.findViewById(R.id.etDailyResetHour)
         etBlockedApps = view.findViewById(R.id.etBlockedApps)
         tvUsageAccessStatus = view.findViewById(R.id.tvUsageAccessStatus)
         val btnSave = view.findViewById<Button>(R.id.btnSaveSettings)
@@ -54,6 +56,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     private fun loadCurrentSettings() {
         val context = requireContext()
         etDailyBaseMinutes.setText(TimeManager.getDailyBaseMinutes(context).toString())
+        etDailyResetHour.setText(TimeManager.getDailyResetHour(context).toString())
         etBlockedApps.setText(TimeManager.getBlockedApps(context).joinToString("\n"))
     }
 
@@ -65,6 +68,12 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             return
         }
 
+        val resetHour = etDailyResetHour.text.toString().trim().toIntOrNull()
+        if (resetHour == null || resetHour !in 0..23) {
+            Toast.makeText(context, R.string.daily_reset_hour_invalid, Toast.LENGTH_SHORT).show()
+            return
+        }
+
         val apps = etBlockedApps.text.toString()
             .lineSequence()
             .map { it.trim() }
@@ -72,6 +81,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             .toSet()
 
         TimeManager.setBlockedApps(context, apps)
+        TimeManager.setDailyResetHour(context, resetHour)
 
         val baseUpdateResult = TimeManager.updateDailyBaseMinutesWithCooldown(context, baseMinutes)
         if (baseUpdateResult.success) {

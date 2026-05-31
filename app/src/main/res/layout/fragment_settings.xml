@@ -50,6 +50,28 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/daily_reset_hour_label"
+            android:textColor="@color/text_primary" />
+
+        <EditText
+            android:id="@+id/etDailyResetHour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/MomentInput"
+            android:inputType="number"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/daily_reset_hour_hint"
+            android:textSize="12sp"
+            android:textColor="@color/text_secondary"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/blocked_apps_label"
             android:textColor="@color/text_primary" />
 

@@ -66,7 +66,7 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
         ioScope.launch {
             val context = requireContext()
             val dao = AppDatabase.getDatabase(context).taskDao()
-            val currentDayKey = TimeManager.getCurrentLogicDayKey()
+            val currentDayKey = TimeManager.getCurrentLogicDayKey(context)
             val startDayKey = currentDayKey - 6
 
             val account = dao.getDailyAccountByDay(currentDayKey)

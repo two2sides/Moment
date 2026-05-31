@@ -275,7 +275,7 @@ class TasksFragment : Fragment(R.layout.fragment_tasks) {
             rewardGrantedMinutes = task.rewardMinutes,
             taskCreatedAtSnapshot = task.createdAt,
             completedAt = System.currentTimeMillis(),
-            logicalDayKey = TimeManager.getCurrentLogicDayKey()
+            logicalDayKey = TimeManager.getCurrentLogicDayKey(requireContext())
         )
     }
 

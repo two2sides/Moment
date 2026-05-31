@@ -85,6 +85,8 @@
 
     <string name="daily_base_minutes_label">每日基础时间（分钟）</string>
     <string name="daily_base_minutes_cooldown_hint">提示：基础时间每24小时仅可修改一次；冷却中仍可保存拦截列表。</string>
+    <string name="daily_reset_hour_label">每日重置时间（0-23点）</string>
+    <string name="daily_reset_hour_hint">到达这个整点后进入新的一天；默认12点。</string>
     <string name="blocked_apps_label">拦截 App 包名（每行一个）</string>
     <string name="save_settings">保存设置</string>
     <string name="open_accessibility_settings">打开无障碍设置</string>
@@ -93,6 +95,7 @@
     <string name="usage_access_status_granted">使用情况访问权限状态：已授权</string>
     <string name="usage_access_status_denied">使用情况访问权限状态：未授权（奖励计时将降级）</string>
     <string name="daily_base_minutes_invalid">基础时间请输入非负整数</string>
+    <string name="daily_reset_hour_invalid">每日重置时间请输入0到23之间的整数</string>
     <string name="daily_base_minutes_cooldown">拦截列表已保存，基础时间仍在冷却中（剩余：%1$s）</string>
     <string name="cooldown_hours_minutes_format">%1$d小时%2$d分钟</string>
     <string name="cooldown_minutes_format">%1$d分钟</string>
